@@ -1,0 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+}
+
+.container {
+    display: flex;
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.sidebar {
+    width: 25%;
+    padding: 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebar .profile-pic {
+    max-width: 150px;
+    max-height: 200px;
+    margin-bottom: 20px;
+    margin-left: 41px;
+}
+
+.sidebar h1, .sidebar .contact-info p, .sidebar .contact-info a {
+    margin: 10px 0;
+}
+
+.sidebar .contact-info {
+    margin-top: auto;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+}
+.sidebar .social-media {
+    margin-top: 20px;
+}
+
+.sidebar .social-media h2 {
+    font-size: 1.4em; /* Larger font size for social media heading */
+}
+
+.sidebar .social-icon {
+    font-size: 2em; /* Larger font size for social media icons */
+    display: inline-block;
+    margin: 5px;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.sidebar .social-icon.github {
+    background-color: #333;
+}
+
+.sidebar .social-icon.github:hover {
+    background-color: #575757;
+}
+
+.sidebar .social-icon.linkedin {
+    background-color: #0077B5;
+}
+
+.sidebar .social-icon.linkedin:hover {
+    background-color: #005582;
+}
+.content {
+    width: 75%;
+    padding: 20px;
+}
+
+.box {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+h2, h3 {
+    background-color: lightgreen; /* Light green background */
+    padding: 10px;               /* Adds space around the text */
+    display: inline-block;       /* Ensures the bar only spans the text width */
+    border-radius: 5px;          /* Optional: Rounded corners for the bar */
+  }
