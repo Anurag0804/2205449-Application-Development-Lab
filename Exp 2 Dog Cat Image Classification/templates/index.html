@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat and Dog Classifier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        form {
+            display: inline-block;
+            margin: 20px auto;
+        }
+        input, select, button {
+            padding: 10px;
+            margin: 10px;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cat and Dog Classifier</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <select name="model">
+            <option value="svm">SVM</option>
+            <option value="rf">Random Forest</option>
+            <option value="lr">Logistic Regression</option>
+            <option value="kmeans">K-Means Clustering</option>
+            <option value="cnn">CNN</option>
+        </select>
+        <button type="submit">Classify</button>
+    </form>
+    <div class="result" id="result"></div>
+
+    <script>
+        document.getElementById('uploadForm').onsubmit = async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+
+            const response = await fetch('/classify', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+            document.getElementById('result').innerText = result.prediction
+                ? `Prediction: ${result.prediction}`
+                : `Error: ${result.error}`;
+        };
+    </script>
+</body>
+</html>
+
