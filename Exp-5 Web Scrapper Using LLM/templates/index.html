@@ -1,1 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Scraper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        input {
+            width: 60%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #summaryOutput {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: left;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
 
+    <h1>Web Scraper with AI Summarization</h1>
+
+    <input type="text" id="urlInput" placeholder="Enter URL to scrape">
+    <br>
+    <button id="scrapeBtn">Scrape</button>
+
+    <div id="summaryOutput"></div>
+
+    <script>
+        document.getElementById("scrapeBtn").addEventListener("click", function () {
+            const url = document.getElementById("urlInput").value;
+            document.getElementById("summaryOutput").innerHTML = "<p>Scraping... Please wait.</p>";
+
+            fetch("/scrape", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ url: url })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("[DEBUG] Response Data:", data);
+                if (data.summary) {
+                    document.getElementById("summaryOutput").innerHTML = 
+                        "<h3>Summary:</h3><ul>" + 
+                        data.summary.map(point => `<li>${point}</li>`).join("") + 
+                        "</ul>";
+                } else {
+                    document.getElementById("summaryOutput").innerHTML = 
+                        "<p style='color:red;'>Error: " + data.error + "</p>";
+                }
+            })
+            .catch(error => {
+                console.error("[ERROR] Fetch Error:", error);
+                document.getElementById("summaryOutput").innerHTML = 
+                    "<p style='color:red;'>Error fetching data.</p>";
+            });
+        });
+    </script>
+
+</body>
+</html>
